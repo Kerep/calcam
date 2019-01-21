@@ -253,7 +253,7 @@ class ZipSaveFile():
 
         if os.path.isdir(dst_path):
             if replace:
-                shutil.rmtree(dist_path)
+                shutil.rmtree(dst_path)
             else:
                 raise IOError('This path already exists in this file! Use replace=True to allow overwriting.')
         elif os.path.isfile(dst_path):
@@ -269,6 +269,8 @@ class ZipSaveFile():
         if os.path.isfile(from_path):
             shutil.copy2(from_path,dst_path)
         elif os.path.isdir(from_path):
+            if replace:
+                shutil.rmtree(dst_path)
             shutil.copytree(from_path,dst_path)
 
 
